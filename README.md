@@ -1,18 +1,18 @@
-# 🐾 CatDog Classifier
+# 🐾 Cat-Dog-Human Classifier
 
-A deep learning image classification project built using a Convolutional Neural Network (CNN) to classify images as **Cat** or **Dog**.
+A deep learning image classification project built using a Convolutional Neural Network (CNN) to classify images as **Cat** , **Dog** or **Human**.
 
 The trained PyTorch model is integrated with a Streamlit web application, allowing users to upload an image and receive a prediction with a confidence score.
 
 ## Live Demo
 
-**Live App:** [YOUR_STREAMLIT_APP_URL](https://cat-dog-classifier-9zvr48zfemseyk2ssgosmb.streamlit.app/)
+**Live App:** [YOUR_STREAMLIT_APP_URL](https://cat-dog-human-classifier-8dz6mydzzcvylb6mewvxzc.streamlit.app/)
 
 ## Screenshot
 
 Here is a screenshot of the application:
 
-![CatDog Classifier](screenshot/app.png)
+![CatDogHuman Classifier](screenshot/app.png)
 
 ##  Project Overview
 
@@ -23,7 +23,7 @@ The complete workflow includes:
 - Dataset preparation
 - Image preprocessing
 - Data augmentation
-- CNN model development
+- Transfer learning using ResNet18
 - Model training
 - Model evaluation
 - Saving trained model weights
@@ -33,29 +33,33 @@ The complete workflow includes:
 
 ## Model Architecture
 
-The classifier is built using PyTorch with three convolutional blocks followed by fully connected layers.
+The classifier is built using PyTorch and a pretrained ResNet18 architecture. The final fully connected layer is modified to classify three classes: Cat, Dog, and Human.
 
 **Architecture:**
 
-Input Image → 256×256×3 → Conv2D (32) → ReLU → MaxPooling → Conv2D (64) → ReLU → MaxPooling → Conv2D (128) → ReLU → MaxPooling → Flatten → Fully Connected (128) → ReLU → Dropout → Output → Cat / Dog
+**Architecture:**
+
+Input Image → 224×224×3 → Conv2D → ReLU → MaxPooling → ResNet18 Residual Blocks → Feature Extraction → Fully Connected Layer (512 → 3) → Output → Cat / Dog / Human
+
 
 ##  Model Performance
 
-The CNN model achieved an accuracy of **83.88%** on the test dataset.
+The project initially used a custom CNN model that achieved an accuracy of**91.07%** on the test dataset.
 
-- **Test Accuracy:** 83.88%
-- **Classes:** Cat and Dog
-- **Input Image Size:** 256 × 256
+- **Test Accuracy:** 91.07%
+- **Classes:** Cat, Dog, and Human
+- **Input Image Size:** 224 × 224
 - **Framework:** PyTorch
-- **Model:** Convolutional Neural Network (CNN)
+- **Model:** ResNet18
+- **Learning Approach** Transfer Learning
 
 ##  Prediction Pipeline
 
-**Upload Image → Resize → Convert to Tensor → CNN Feature Extraction → Classification → Cat / Dog → Confidence Score**
+**Upload Image → Resize → Convert to Tensor → ImageNet Normalization → ResNet18 Feature Extraction → Classification → Cat / Dog / Human → Confidence Score**
 
 ## Web Application
 
-The trained CNN model is integrated into a Streamlit web application.
+The trained ResNet18 model is integrated into a Streamlit web application.
 
 Users can:
 
@@ -68,8 +72,8 @@ Users can:
 
 ## Application Features
 
--  Cat vs Dog image classification
--  PyTorch CNN model
+-  Cat, Dog, and Human image classification
+-  ResNet18 transfer learning model
 -  Confidence score
 -  Image preview
 -  Mobile-friendly interface
@@ -81,6 +85,7 @@ Users can:
 - Python
 - PyTorch
 - Torchvision
+- ResNet18
 - Streamlit
 - Pillow
 - NumPy
@@ -90,10 +95,10 @@ Users can:
 
 ##  Project Structure
 
-Cat-Dog-Classifier/
+Cat-Dog-human-Classifier/
 ├── app.py
 ├── model.py
-├── cat_dog_cnn.pth
+├── resnet18_cat_dog_human.pth
 ├── cat_dog_classifier.ipynb
 ├── requirements.txt
 ├── .gitignore
@@ -107,7 +112,7 @@ git clone YOUR_GITHUB_REPOSITORY_URL
 
 ### 2. Navigate to the Project
 
-cd Cat-Dog-Classifier
+cd Cat-Dog-Human-Classifier
 
 ### 3. Create Virtual Environment
 
@@ -139,7 +144,7 @@ The notebook contains the training and evaluation process used to develop the CN
 
 The trained model weights are stored in:
 
-cat_dog_cnn.pth
+resnet18_cat_dog_human.pth
 
 The Streamlit application loads these trained weights during inference.
 
